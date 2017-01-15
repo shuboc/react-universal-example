@@ -1,11 +1,22 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import * as actions from './store'
 
-const Counter = ({count}) => (
+const Counter = ({count, add, subtract}) => (
   <div>
-    <button>+</button>
+    <button onClick={add}>+</button>
     <span>{count}</span>
-    <button>-</button>
+    <button onClick={subtract}>-</button>
   </div>
 )
 
-export default Counter;
+const mapStateToProps = (state) => {
+  return {
+    count: state
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  actions
+)(Counter);
