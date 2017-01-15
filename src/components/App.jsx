@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import * as actions from './store'
+import * as actions from '../store'
 
-const Counter = ({count, add, subtract}) => (
+const App = ({count, add, subtract}) => (
   <div>
     <button onClick={add}>+</button>
     <span>{count}</span>
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   actions
-)(Counter);
+)(App);

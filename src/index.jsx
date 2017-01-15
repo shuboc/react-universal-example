@@ -6,13 +6,13 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
 import reducer from './store'
-import Counter from './Counter'
+import App from './components/App'
 
 let store = createStore(reducer)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Counter />
+    <App />
   </Provider>,
   document.getElementById('root')
 )
