@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import * as actions from '../store/count'
+import * as actions from '../actions/count'
 
 const Counter = ({count, add, subtract}) => (
   <div>
