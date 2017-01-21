@@ -6,13 +6,11 @@ import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
 import reducer from './store'
-import App from './components/App'
+import Root from './components/Root'
 
 let store = createStore(reducer)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('root')
 )

@@ -1,22 +1,18 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import * as actions from '../store'
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
 
-const App = ({count, add, subtract}) => (
+const App = ({children}) => (
   <div>
-    <button onClick={add}>+</button>
-    <span>{count}</span>
-    <button onClick={subtract}>-</button>
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+    </div>
+    {children}
   </div>
 )
 
-const mapStateToProps = (state) => {
-  return {
-    count: state
-  }
+App.propTypes = {
+  children: PropTypes.object.isRequired
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(App);
+export default App
