@@ -1,8 +1,12 @@
+var webpack = require('webpack')
+
 module.exports = {
-  entry: './src/index',
+  entry: {
+    app: './src/index'
+  },
   output: {
     path: './bin',
-    filename: 'client.bundle.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
@@ -16,5 +20,16 @@ module.exports = {
   resolve: {
     extensions: ["", ".js", '.jsx']
   },
-  devtool: "eval"
+  devtool: "#source-map",
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    hotOnly: true,
+    stats: 'errors-only',
+    host: process.env.HOST,
+    port: process.env.PORT
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 }
