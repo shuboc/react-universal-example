@@ -12,7 +12,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: 'babel',
+        loaders: ['react-hot', 'babel'],
         include: /src/
       }
     ]
@@ -31,6 +31,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 }
