@@ -2,7 +2,7 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    app: './src/index'
+    app: ['webpack/hot/dev-server', './src/index']
   },
   output: {
     path: './bin',
@@ -24,12 +24,13 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    hotOnly: true,
+    inline: true,
     stats: 'errors-only',
     host: process.env.HOST,
     port: process.env.PORT
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ]
 }
