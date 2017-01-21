@@ -4,10 +4,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
 
-import reducer from './store'
+import {configureStore} from './store'
 import Root from './components/Root'
 
-let store = createStore(reducer)
+const store = configureStore()
 
 ReactDOM.render(
   <Root store={store} />,
