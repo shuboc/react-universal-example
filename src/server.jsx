@@ -9,7 +9,11 @@ const app = Express()
 const PORT = 3000
 
 const handleRender = (req, res) => {
-  // TODO
+  const store = configureStore()
+  const html = renderToString(<Root store={store} />)
+  const preloadedState = store.getState()
+
+  res.send(renderFullPage(html, preloadedState))
 }
 
 const renderFullPage = (html, preloadedState) => {
