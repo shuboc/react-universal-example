@@ -7,7 +7,9 @@ import {createStore} from 'redux'
 import {configureStore} from './store'
 import Root from './components/Root'
 
-const store = configureStore()
+const initialState = window.__PRELOADED_STATE__;
+
+const store = configureStore(initialState)
 
 ReactDOM.render(
   <Root store={store} />,

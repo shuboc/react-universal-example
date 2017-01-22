@@ -3,7 +3,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    app: ['webpack/hot/dev-server', './src/index']
+    client: ['webpack/hot/dev-server', './src/client']
   },
   output: {
     path: './bin',
