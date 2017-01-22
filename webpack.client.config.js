@@ -3,11 +3,15 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
-    client: ['webpack/hot/dev-server', './src/client']
+    client: [
+      'webpack-hot-middleware/client?reload=true',
+      './src/client'
+    ]
   },
   output: {
-    path: './bin',
-    filename: '[name].js'
+    path: `${__dirname}/bin`,
+    filename: '[name].js',
+    publicPath: 'http://localhost:3000/static/'
   },
   module: {
     loaders: [
@@ -22,22 +26,17 @@ module.exports = {
     extensions: ["", ".js", '.jsx']
   },
   devtool: "#source-map",
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    stats: 'errors-only',
-    host: process.env.HOST,
-    port: process.env.PORT
-  },
+  // devServer: {
+  //   historyApiFallback: true,
+  //   hot: true,
+  //   inline: true,
+  //   stats: 'errors-only',
+  //   host: process.env.HOST,
+  //   port: process.env.PORT
+  // },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
-      inject: 'body'
-    })
+    new webpack.NoErrorsPlugin()
   ]
 }
