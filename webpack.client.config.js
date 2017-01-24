@@ -1,5 +1,6 @@
 var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var path = require('path')
+var fs = require('fs')
 
 module.exports = {
   entry: {
@@ -10,7 +11,7 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/bin`,
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     publicPath: 'http://localhost:3000/static/'
   },
   module: {
@@ -26,17 +27,15 @@ module.exports = {
     extensions: ["", ".js", '.jsx']
   },
   devtool: "#source-map",
-  // devServer: {
-  //   historyApiFallback: true,
-  //   hot: true,
-  //   inline: true,
-  //   stats: 'errors-only',
-  //   host: process.env.HOST,
-  //   port: process.env.PORT
-  // },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    function(compiler) {
+      this.plugin("done", function(stats) {
+        var statsPath = path.resolve("./bin/client.stats.json");
+        fs.writeFileSync(statsPath, JSON.stringify(stats.toJson()));
+      });
+    }
   ]
 }
