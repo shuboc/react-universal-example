@@ -1,6 +1,4 @@
 var webpack = require('webpack')
-var path = require('path')
-var fs = require('fs')
 
 module.exports = {
   entry: {
@@ -11,7 +9,7 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/bin`,
-    filename: '[name].[hash].js',
+    filename: '[name].js',
     publicPath: 'http://localhost:3000/static/'
   },
   module: {
@@ -30,12 +28,6 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.NoErrorsPlugin(),
-    function(compiler) {
-      this.plugin("done", function(stats) {
-        var statsPath = path.resolve("./bin/client.stats.json");
-        fs.writeFileSync(statsPath, JSON.stringify(stats.toJson()));
-      });
-    }
+    new webpack.NoErrorsPlugin()
   ]
 }
