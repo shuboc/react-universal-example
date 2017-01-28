@@ -3,6 +3,7 @@ import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
+import {browserHistory} from 'react-router'
 
 import {configureStore} from './store'
 import Root from './components/Root'
@@ -12,7 +13,7 @@ const initialState = window.__PRELOADED_STATE__;
 const store = configureStore(initialState)
 
 ReactDOM.render(
-  <Root store={store} />,
+  <Root store={store} history={browserHistory} />,
   document.getElementById('app')
 )
 

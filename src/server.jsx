@@ -2,6 +2,8 @@ import path from 'path'
 import Express from 'express'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
+import {Provider} from 'redux'
+import {createMemoryHistory} from 'react-router'
 
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -11,13 +13,15 @@ var stats = require('../bin/client.stats.json')
 
 import {configureStore} from './store'
 let Root = require('./components/Root').default
+import Counter from './components/Counter'
 
 const app = Express()
 const PORT = 3000
 
 const handleRender = (req, res) => {
   const store = configureStore()
-  const html = renderToString(<Root store={store} />)
+  const history = createMemoryHistory()
+  const html = renderToString(<Root store={store} history={history}/>)
   const preloadedState = store.getState()
 
   res.send(renderFullPage(html, preloadedState))
