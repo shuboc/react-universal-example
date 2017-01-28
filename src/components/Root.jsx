@@ -2,18 +2,11 @@ import React, {PropTypes} from 'react'
 import {Provider} from 'react-redux'
 import {Router, Route, IndexRoute} from 'react-router'
 
-import App from './App'
-import Counter from './Counter'
-import About from './About'
+import routes from '../routes'
 
 const Root = ({store, history}) => (
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Counter} />
-        <Route path="about" component={About} />
-      </Route>
-    </Router>
+    <Router history={history} routes={routes} />
   </Provider>
 )
 

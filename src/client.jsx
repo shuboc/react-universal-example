@@ -3,27 +3,32 @@ import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
-import {browserHistory} from 'react-router'
+import {Provider} from 'react-redux'
+import {browserHistory, Router} from 'react-router'
 
 import {configureStore} from './store'
-import Root from './components/Root'
+let routes = require('./routes').default
 
 const initialState = window.__PRELOADED_STATE__;
 
 const store = configureStore(initialState)
 
-ReactDOM.render(
-  <Root store={store} history={browserHistory} />,
-  document.getElementById('app')
-)
+const render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        {routes}
+      </Router>
+    </Provider>,
+    document.getElementById('app')
+  )
+}
+
+render()
 
 if (module.hot) {
-  module.hot.accept('./components/Root', () => {
-    const Root = require('./components/Root').default
-
-    ReactDOM.render(
-      <Root store={store} />,
-      document.getElementById('app')
-    )
+  module.hot.accept('./routes', () => {
+    routes = require('./routes').default
+    render()
   })
 }

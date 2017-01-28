@@ -2,8 +2,8 @@ import path from 'path'
 import Express from 'express'
 import React from 'react'
 import {renderToString} from 'react-dom/server'
-import {Provider} from 'redux'
-import {createMemoryHistory} from 'react-router'
+import {createMemoryHistory, RouterContext, match} from 'react-router'
+import {Provider} from 'react-redux'
 
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -11,24 +11,30 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import clientWebpackConfig from '../webpack.client.config'
 
 import {configureStore} from './store'
-let Root = require('./components/Root').default
-import Counter from './components/Counter'
+let routes = require('./routes').default
 
 const app = Express()
 const PORT = 3000
 
 const handleRender = (req, res) => {
   const store = configureStore()
-  const history = createMemoryHistory()
-  const html = renderToString(<Root store={store} history={history}/>)
-  const preloadedState = store.getState()
+  // const history = createMemoryHistory() // TODO: how to use it?
 
-  res.send(renderFullPage(html, preloadedState))
+  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+    const html = renderToString(
+      <Provider store={store}>
+        <RouterContext {...renderProps} />
+      </Provider>
+    )
+    const preloadedState = store.getState()
+
+    res.send(renderFullPage(html, preloadedState))
+  })
 }
 
 if (module.hot) {
-  module.hot.accept('./components/Root', () => {
-    Root = require('./components/Root').default
+  module.hot.accept('./routes', () => {
+    routes = require('./routes').default
   })
 }
 
@@ -59,7 +65,7 @@ app.use(webpackDevMiddleware(compiler, {
 }))
 app.use(webpackHotMiddleware(compiler))
 
-app.get('/', handleRender)
+app.get('/*', handleRender)
 
 app.listen(PORT, (err) => {
   if (err) {
