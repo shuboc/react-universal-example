@@ -39,5 +39,16 @@ module.exports = {
             "error",
             "never"
         ]
+    },
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": {
+            "resolve": {
+              "extensions": ['', '.js', '.jsx']
+            }
+          }
+        }
+      }
     }
 };
