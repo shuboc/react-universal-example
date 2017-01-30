@@ -20,14 +20,22 @@ const handleRender = (req, res) => {
   // const history = createMemoryHistory() // TODO: how to use it?
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    const html = renderToString(
-      <Provider store={store}>
-        <RouterContext {...renderProps} />
-      </Provider>
-    )
-    const preloadedState = store.getState()
+    if (error) {
+      res.status(500).send(error.message)
+    } else if (redirectLocation) {
+      res.redirect(redirectLocation.pathname + redirectLocation.search)
+    } else if (renderProps) {
+      const html = renderToString(
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
+      )
+      const preloadedState = store.getState()
 
-    res.send(renderFullPage(html, preloadedState))
+      res.send(renderFullPage(html, preloadedState))
+    } else {
+      res.status(404).send('Not found')
+    }
   })
 }
 
