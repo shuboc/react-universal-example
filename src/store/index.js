@@ -5,10 +5,10 @@ export const configureStore = (initialState) => {
   const store = createStore(rootReducer, initialState)
 
   module.hot.accept('../reducers', () => {
-    const nextReducer = require('../reducers').default;
+    const nextReducer = require('../reducers').default
 
-    store.replaceReducer(nextReducer);
-  });
+    store.replaceReducer(nextReducer)
+  })
 
   return store
 }
