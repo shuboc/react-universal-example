@@ -1,15 +1,14 @@
 var webpack = require('webpack')
-var path = require('path')
 var fs = require('fs')
 
-var nodeModules = {};
+var nodeModules = {}
 fs.readdirSync('node_modules')
   .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1;
+    return ['.bin'].indexOf(x) === -1
   })
   .forEach(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
-  });
+    nodeModules[mod] = 'commonjs ' + mod
+  })
 
 module.exports = {
   target: 'node',
@@ -29,15 +28,15 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
+        loaders: ['babel', 'eslint'],
         include: /src/
       }
     ]
   },
   resolve: {
-    extensions: ["", ".js", '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
-  devtool: "#eval-source-map",
+  devtool: '#eval-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),

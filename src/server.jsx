@@ -1,11 +1,10 @@
-import path from 'path'
-import Express from 'express'
 import React from 'react'
+import Express from 'express'
 import {renderToString} from 'react-dom/server'
-import {createMemoryHistory, RouterContext, match} from 'react-router'
+import {match, RouterContext} from 'react-router'
 import {Provider} from 'react-redux'
 
-import webpack from 'webpack';
+import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import clientWebpackConfig from '../webpack.client.config'

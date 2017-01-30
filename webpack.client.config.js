@@ -16,15 +16,15 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
+        loaders: ['react-hot', 'babel', 'eslint'],
         include: /src/
       }
     ]
   },
   resolve: {
-    extensions: ["", ".js", '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
-  devtool: "#source-map",
+  devtool: '#source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),

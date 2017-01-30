@@ -2,14 +2,13 @@ import 'babel-polyfill'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import {browserHistory, Router} from 'react-router'
 
 import {configureStore} from './store'
 let routes = require('./routes').default
 
-const initialState = window.__PRELOADED_STATE__;
+const initialState = window.__PRELOADED_STATE__
 
 const store = configureStore(initialState)
 

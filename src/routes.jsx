@@ -1,6 +1,5 @@
 import React from 'react'
-import {Route, Router, IndexRoute, Link} from 'react-router'
-import {Provider} from 'redux'
+import {Route, IndexRoute} from 'react-router'
 
 import App from './components/App'
 import Counter from './components/Counter'
