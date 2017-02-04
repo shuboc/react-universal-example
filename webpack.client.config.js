@@ -3,14 +3,14 @@ var webpack = require('webpack')
 module.exports = {
   entry: {
     client: [
-      'webpack-hot-middleware/client?reload=true',
+      'webpack/hot/dev-server',
       './src/client'
     ]
   },
   output: {
     path: `${__dirname}/bin`,
     filename: '[name].js',
-    publicPath: 'http://localhost:3000/static/'
+    publicPath: '/static/'
   },
   module: {
     loaders: [
@@ -25,8 +25,17 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   devtool: '#source-map',
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    stats: 'errors-only',
+    host: process.env.HOST,
+    port: process.env.PORT
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 }

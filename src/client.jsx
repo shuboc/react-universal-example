@@ -8,9 +8,7 @@ import {browserHistory, Router} from 'react-router'
 import {configureStore} from './store'
 let routes = require('./routes').default
 
-const initialState = window.__PRELOADED_STATE__
-
-const store = configureStore(initialState)
+const store = configureStore()
 
 const render = () => {
   ReactDOM.render(

@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "nodemon --watch webpack.*.config.js --exec \"webpack --watch --config webpack.server.config.js\"",
-    "start": "node bin/server.js",
+    "start": "webpack-dev-server --config webpack.client.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
